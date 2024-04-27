@@ -2,9 +2,11 @@ import { useAtom } from "jotai";
 import React from "react";
 import { SelectedConversation } from "../../Store";
 
-const Conversation = ({ conversation, lastIndex, emoji }) => {
+const Conversation = ({ conversation, lastIndex, emoji, onlineUsers }) => {
   const [selectedConversation, setSelectedConversation] =
     useAtom(SelectedConversation);
+  const isOnline = onlineUsers.includes(conversation._id);
+  console.log(onlineUsers);
   return (
     <>
       <div
@@ -13,7 +15,7 @@ const Conversation = ({ conversation, lastIndex, emoji }) => {
         }`}
         onClick={() => setSelectedConversation(conversation)}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
           <div className="w-12 rounded-full">
             <img src={conversation.profilePic} alt="user avatar" className="" />
           </div>

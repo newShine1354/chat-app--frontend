@@ -2,13 +2,16 @@ import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import useFetchMessages from "../../../hooks/useFetchMessages";
 import MessageSkeleton from "../../skeletons/MessageSkeleton";
+import useListenMessages from "../../../hooks/useListenMessages";
 
 const Messages = () => {
   const { loading, messages } = useFetchMessages();
   const lastMessageRef = useRef();
+  useListenMessages();
   useEffect(() => {
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+  
 
   return (
     <>

@@ -3,7 +3,7 @@ import Conversation from "./Conversation";
 import useConversation from "../../../hooks/useConversation";
 import { getRandomEmoji, funEmojis } from "../../../utils/imoji";
 
-const Conversations = () => {
+const Conversations = ({ onlineUsers }) => {
   const { loading, conversations } = useConversation();
   return (
     <div className="py-2 flex flex-col overflow-auto">
@@ -13,6 +13,7 @@ const Conversations = () => {
             conversation={conversation}
             emoji={getRandomEmoji()}
             lastIndex={i === funEmojis.length - 1}
+            onlineUsers={onlineUsers}
           />
         </div>
       ))}
