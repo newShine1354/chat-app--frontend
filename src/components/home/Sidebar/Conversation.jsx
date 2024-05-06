@@ -6,7 +6,7 @@ const Conversation = ({ conversation, lastIndex, emoji, onlineUsers }) => {
   const [selectedConversation, setSelectedConversation] =
     useAtom(SelectedConversation);
   const isOnline = onlineUsers.includes(conversation._id);
-  console.log(onlineUsers);
+  // console.log(onlineUsers);
   return (
     <>
       <div

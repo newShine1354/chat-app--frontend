@@ -4,10 +4,12 @@ import { Messages, SelectedConversation, User } from "../components/Store";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { server } from "../utils/constants";
+import { useCookies } from "react-cookie";
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useAtom(Messages);
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
   const [selectedConversation, setSelectedConversation] =
     useAtom(SelectedConversation);
   const [user] = useAtom(User);
@@ -19,7 +21,11 @@ const useSendMessage = () => {
         `${server}/message/send/${selectedConversation?._id}`,
         {
           message: currentMessage,
-          senderId: user._id,
+        },
+        {
+          headers: {
+            Authorization: cookies.jwt,
+          },
         }
       );
       // console.log("newMessage", res.data.newMessage);

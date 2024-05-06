@@ -5,10 +5,12 @@ import { server } from "../utils/constants";
 import axios from "axios";
 import { useAtom } from "jotai";
 import { User } from "../components/Store";
+import { useCookies } from "react-cookie";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useAtom(User);
+  const [cookies, setCookie] = useCookies(["jwt"]);
   const signup = async ({
     fullName,
     username,
@@ -41,12 +43,14 @@ const useSignup = () => {
       const res = await axios.post(`${server}/auth/signup`, {
         fullName,
         username,
-        password,
+        password, 
         confirmPassword,
-        gender,
+        gender, 
       });
       // console.log(res);
       localStorage.setItem("chat-user", JSON.stringify(res?.data?.userData));
+      // console.log(res);
+      setCookie("jwt", res?.data?.token)
       setUser(res?.data?.userData);
     } catch (error) {
       toast.error(error?.message);

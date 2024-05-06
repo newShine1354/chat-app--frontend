@@ -9,7 +9,7 @@ const SearchInput = () => {
   const [selectedConversation, setSelectedConversation] =
     useAtom(SelectedConversation);
   const [conversations, setConversations] = useAtom(Conversations);
-  console.log(search);
+  // console.log(search);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const SearchInput = () => {
       toast.error("Enter atleast 3 characters");
       return;
     }
-    console.log("conversations", conversations);
+    // console.log("conversations", conversations);
     const conversation = conversations.find((c) =>
       c.fullName.toLowerCase().includes(search.toLowerCase())
     );

@@ -13,6 +13,7 @@ const useLogin = ({ username, password }) => {
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const login = async () => {
     setLoading(true);
+    console.log("jwt", cookies.jwt);
     try {
       if (username.length < 4) {
         toast.error("Enter username of atleast 4 characters.");
@@ -24,17 +25,19 @@ const useLogin = ({ username, password }) => {
         );
         return;
       }
-      const res = await axios.post(`${server}/auth/login`, {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        `${server}/auth/login`,
+        {
+          username,
+          password,
+        },
+      );
       if (res.error) {
         throw new Error(res.error);
       }
       localStorage.setItem("chat-user", JSON.stringify(res?.data?.userData));
       setUser(res?.data?.userData);
-      // console.log(res);
-      // setCookie("jwt", res?.data?.refreshToken);
+      setCookie("jwt", res?.data?.token);
     } catch (error) {
       toast.error(error?.message || "Please register first.");
     } finally {
