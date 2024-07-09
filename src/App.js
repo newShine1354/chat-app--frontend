@@ -13,6 +13,7 @@ import { useCookies } from "react-cookie";
 import { server } from "./utils/constants";
 import axios from "axios";
 
+
 function App() {
   const [user, setUser] = useAtom(User);
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
