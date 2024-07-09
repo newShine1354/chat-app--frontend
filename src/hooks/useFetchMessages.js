@@ -15,6 +15,9 @@ const useFetchMessages = () => {
 
   const fetchMessages = async () => {
     setLoading(true);
+
+
+    
     try {
       const res = await axios.get(
         `${server}/message/${selectedConversation._id}`,
