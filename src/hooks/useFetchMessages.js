@@ -14,7 +14,6 @@ const useFetchMessages = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
 
   const fetchMessages = async () => {
-    console.log("hellO");
     setLoading(true);
     try {
       const res = await axios.get(
