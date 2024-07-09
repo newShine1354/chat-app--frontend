@@ -16,6 +16,8 @@ import axios from "axios";
 
 function App() {
   const [user, setUser] = useAtom(User);
+
+  
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
   const me = async () => {
     if (cookies.jwt) {
